@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Black+Ops+One&family=Coda+Caption:wght@800&family=Stick&display=swap" rel="stylesheet">
+    <title>Calender</title>
+    <style>
+        *{
+            padding: 0;
+            margin:0;
+        }
+        html{
+            font-size: 62.5%;
+        }
+        body{
+            background-color: #c3fcf1;
+        }
+        .clock-section{
+            position:absolute;
+            height: 400px;
+            width: 400px;
+            left: 100px;
+            top: 40%;
+            transform: translateY(-200px);
+            background-color: rgba(0, 0, 0, 0.335);
+            border: 10px solid none;
+            border-radius: 50%;
+            box-shadow: 10px 10px 10px #659b9194,
+            -10px -10px 20px #fcf34055;
+        }
+        .clock-section .inner-section{
+            width: 95%;
+            height: 95%;
+            position:absolute;
+            left: 2.5%;
+            overflow: hidden;
+            border-radius: 50%;
+            top: 2.5%;
+        }
+        .clock-section .inner-section .first-set{
+            background-color: #75d4fd;
+            position: absolute;
+            overflow: hidden;
+            border: 4px solid black;
+            transform: translate(-8px, -8px);
+            height: 60%;
+            width: 50%;
+        }
+        .clock-section .inner-section .sec-set{
+            background-color: #33135c;
+            position: absolute;
+            height: 30%;
+            overflow: hidden;
+            border: 4px solid black;
+            transform: translate(-4px, -8px);
+            left: 50%;
+            width: 50%;
+
+        }
+        .clock-section .inner-section .thir-set{
+            background-color: #13ca91;
+            position: absolute;
+            overflow: hidden;
+            border: 4px solid black;
+            transform: translate(-8px, -4px);
+            top: 60%;
+            height: 40%;
+            width: 50%;
+        }
+        .clock-section .inner-section .fourt-set{
+            background-color: #fea0fe;
+            position: absolute;
+            border: 4px solid black;
+            transform: translate(-4px, -4px);
+            top: 30%;
+            overflow: hidden;
+            left: 50%;
+            height: 70%;
+            width: 50%;
+        }
+        .clock-section .inner-section .middlecircle{
+            background-color: #fcf340;
+            position:absolute;
+            height: 30%;
+            overflow: hidden;
+            width: 30%;
+            left: 35%;
+            top: 35%;
+            transform: translate(-4px, -4px);
+            border-radius: 50%;
+            border: 4px solid rgba(0, 0, 0);
+            z-index: 2;
+        }
+        .clock-section .inner-section .middlecircle .container2{
+            position:absolute;
+            height: 380px;
+            width: 380px;
+            top:-125%;
+            left: -125%;
+            transform: translate(8.5px, 8.5px);
+            border-radius: 50%;
+        }
+        .clock-section .inner-section .middlecircle .container2 .second{
+            height: 90%;
+            top: 5%;
+            width: 12px;
+            left: 184px;
+            overflow: hidden;
+            border-radius: 6px;
+            position:absolute;
+        }
+        .clock-section .inner-section .middlecircle .container2 .second .sechand{
+            height: 65%;
+            width: 100%;
+            background-color:#054e6f;
+        }
+        .clock-section .inner-section .middlecircle .container2 .minute{
+            height: 90%;
+            top: 5%;
+            width: 20px;
+            left: 180px;
+            overflow: hidden;
+            border-radius: 10px;
+            position:absolute;
+        }
+        .clock-section .inner-section .middlecircle .container2 .minute .minhand{
+            height: 65%;
+            width: 100%;
+            background-color:#8500f7;
+        }
+        .clock-section .inner-section .middlecircle .container2 .hour{
+            height: 70%;
+            top: 15%;
+            width: 30px;
+            left: 175px;
+            overflow: hidden;
+            border-radius: 15px;
+            position:absolute;
+        }
+        .clock-section .inner-section .middlecircle .container2 .hour .hourhand{
+            height: 65%;
+            width: 100%;
+            background-color:#39ff14;
+        }
+        .clock-section .inner-section .sec-set .container2{
+            position:absolute;
+            height: 380px;
+            width: 380px;
+            top: 4px;
+            left: -100%;
+            border-radius: 50%;
+        }
+        .clock-section .inner-section .sec-set .container2 .second{
+            height: 90%;
+            top: 5%;
+            width: 12px;
+            left: 184px;
+            overflow: hidden;
+            border-radius: 6px;
+            position:absolute;
+        }
+        .clock-section .inner-section .sec-set .container2 .second .sechand{
+            height: 65%;
+            width: 100%;
+            background-color:#75d4fd;
+        }
+        .clock-section .inner-section .sec-set .container2 .minute{
+            height: 90%;
+            top: 5%;
+            width: 20px;
+            left: 180px;
+            overflow: hidden;
+            border-radius: 10px;
+            position:absolute;
+        }
+        .clock-section .inner-section .sec-set .container2 .minute .minhand{
+            height: 65%;
+            width: 100%;
+            background-color:#fea0fe;
+        }
+        .clock-section .inner-section .sec-set .container2 .hour{
+            height: 70%;
+            top: 15%;
+            width: 30px;
+            left: 175px;
+            overflow: hidden;
+            border-radius: 15px;
+            position:absolute;
+        }
+        .clock-section .inner-section .sec-set .container2 .hour .hourhand{
+            height: 65%;
+            width: 100%;
+            background-color:#13ca91;
+        }
+        .clock-section .inner-section .thir-set .container2{
+            position:absolute;
+            height: 380px;
+            width: 380px;
+            /* background-color: wheat; */
+            bottom: 0px;
+            left: 4px;
+            border-radius: 50%;
+        }
+        .clock-section .inner-section .thir-set .container2 .second{
+            height: 90%;
+            top: 5%;
+            width: 12px;
+            left: 184px;
+            overflow: hidden;
+            border-radius: 6px;
+            position:absolute;
+        }
+        .clock-section .inner-section .thir-set .container2 .second .sechand{
+            height: 65%;
+            width: 100%;
+            background-color:#fea0fe;
+        }
+        .clock-section .inner-section .thir-set .container2 .minute{
+            height: 90%;
+            top: 5%;
+            width: 20px;
+            left: 180px;
+            overflow: hidden;
+            border-radius: 10px;
+            position:absolute;
+        }
+        .clock-section .inner-section .thir-set .container2 .minute .minhand{
+            height: 65%;
+            width: 100%;
+            background-color:#75d4fd;
+        }
+        .clock-section .inner-section .thir-set .container2 .hour{
+            height: 70%;
+            top: 15%;
+            width: 30px;
+            left: 175px;
+            overflow: hidden;
+            border-radius: 15px;
+            position:absolute;
+        }
+        .clock-section .inner-section .thir-set .container2 .hour .hourhand{
+            height: 65%;
+            width: 100%;
+            background-color:#33135c;
+        }
+        .clock-section .inner-section .fourt-set .container2{
+            position:absolute;
+            height: 380px;
+            width: 380px;
+            bottom: 0px;
+            right: 0px;
+            border-radius: 50%;
+        }
+        .clock-section .inner-section .fourt-set .container2 .second{
+            height: 90%;
+            top: 5%;
+            width: 12px;
+            left: 184px;
+            overflow: hidden;
+            border-radius: 6px;
+            position:absolute;
+        }
+        .clock-section .inner-section .fourt-set .container2 .second .sechand{
+            height: 65%;
+            width: 100%;
+            background-color:#13ca91;
+        }
+        .clock-section .inner-section .fourt-set .container2 .minute{
+            height: 90%;
+            top: 5%;
+            width: 20px;
+            left: 180px;
+            overflow: hidden;
+            border-radius: 10px;
+            position:absolute;
+        }
+        .clock-section .inner-section .fourt-set .container2 .minute .minhand{
+            height: 65%;
+            width: 100%;
+            background-color:#33135c;
+        }
+        .clock-section .inner-section .fourt-set .container2 .hour{
+            height: 70%;
+            top: 15%;
+            width: 30px;
+            left: 175px;
+            overflow: hidden;
+            border-radius: 15px;
+            position:absolute;
+        }
+        .clock-section .inner-section .fourt-set .container2 .hour .hourhand{
+            height: 65%;
+            width: 100%;
+            background-color:#75d4fd;
+        }
+        .clock-section .inner-section .first-set .container2{
+            position:absolute;
+            height: 380px;
+            width: 380px;
+            top: 4px;
+            left: 4px;
+            border-radius: 50%;
+        }
+        .clock-section .inner-section .first-set .container2 .second{
+            height: 90%;
+            top: 5%;
+            width: 12px;
+            left: 184px;
+            overflow: hidden;
+            border-radius: 6px;
+            position:absolute;
+        }
+        .clock-section .inner-section .first-set .container2 .second .sechand{
+            height: 65%;
+            width: 100%;
+            background-color:#33135c;
+        }
+        .clock-section .inner-section .first-set .container2 .minute{
+            height: 90%;
+            top: 5%;
+            width: 20px;
+            left: 180px;
+            overflow: hidden;
+            border-radius: 10px;
+            position:absolute;
+        }
+        .clock-section .inner-section .first-set .container2 .minute .minhand{
+            height: 65%;
+            width: 100%;
+            background-color:#13ca91;
+        }
+        .clock-section .inner-section .first-set .container2 .hour{
+            height: 70%;
+            top: 15%;
+            width: 30px;
+            left: 175px;
+            overflow: hidden;
+            border-radius: 15px;
+            position:absolute;
+        }
+        .clock-section .inner-section .first-set .container2 .hour .hourhand{
+            height: 65%;
+            width: 100%;
+            background-color:#fea0fe;
+        }
+        .dot{
+            height: 20px;
+            width: 20px;
+            border-top-right-radius: 70%;
+            border-top-left-radius: 50%;
+            border-bottom-left-radius: 70%;
+            border-bottom-right-radius: 50%;
+            position:absolute;
+            left: 50%;
+            z-index: 999;
+            background-color: black;
+            top: 50%;
+            transform: translate(-10px, -10px)
+        }
+        .calendersect{
+            left: 43%;
+            top: 5vh;
+            user-select: none;
+            position: relative;
+            height: 90vh;
+            background-color: #354147;
+            width: 55%;
+        }
+        .calendersect .top{
+            width: 100%;
+            height: 20vh;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: "Black Ops One", sans-serif;
+            font-size: 40px;
+        }
+        .calendersect .top .Month-name .Year{
+            font-size: 20px;
+        }
+        .calendersect .top .Month-name{
+            color: #FFA0A0;
+            text-transform: uppercase;
+            line-height: 25px;
+            text-align: center;
+            font-size: 60px;
+        }
+        .calendersect .top .left, .calendersect .top .right{
+            color: #FFE3E3;
+            cursor: pointer;
+        }
+        .digitalclk{
+            height: 50px;
+            width: 400px;
+            text-align: center;
+            font-weight: 100;
+            color: #0073e6;
+            left: 100px;
+            font-family: "Archivo Black", sans-serif;
+            font-size: 50px;
+            bottom: 100px;
+            position: absolute;
+        }
+
+        .calendersect .days{
+            box-sizing: border-box;
+            display: flex;
+            background-color: #628395;
+            width: 100%;
+            font-size: 20px;
+            font-family: "Black Ops One", sans-serif;
+            height: 10vh;
+            color: #FFA0A0;
+            text-align: center;
+            align-items: center;
+        }
+        .calendersect .days div{
+            width: calc(100% / 7);
+        }
+
+        .calendersect .dates div span:hover{
+            border-color: greenyellow;
+            color: #0073e6;
+        }
+        .calendersect .dates{
+            width: 100%;
+            box-sizing: border-box;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .calendersect .dates .prev, .calendersect .dates .next{
+            opacity: .4;
+        }
+        .calendersect .dates .today{
+            height: 60px;
+            display: inline-block;
+            width: 60px;
+            border-radius: 10px;
+            color: #354147;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position:absolute;
+            background-color: greenyellow;
+        }
+        .calendersect .dates div span{
+            height: 60px;
+            display: inline-block;
+            width: 60px;
+            cursor: pointer;
+            transition: .2s ease;
+            border: 3px solid #354147;
+            box-sizing: border-box;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position:absolute;
+        }
+        .calendersect .dates div{
+            position:relative;
+            width: calc(100% / 7);
+            height: calc(100% / 7);
+            font-size: 20px;
+            font-family: "Black Ops One", sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #FFE3E3;
+        }
+        .meri{
+            height: 50px;
+            width: 50px;
+            font-family: "Archivo Black", sans-serif;
+            color: #354147;
+            bottom: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            left: 445px;
+            text-align: center;
+            position:absolute;
+        }
+        .qu{
+            width: 440px;
+            height: 50px;
+            display: flex;
+            justify-content: space-evenly;
+            bottom: 60px;
+            left: 80px;
+            font-family: serif;
+            position:absolute;
+            align-items: center;
+        }
+        .qu div{
+            font-size: 16px;
+            font-family: "Archivo Black", sans-serif;
+            color: #354147;
+        }
+        .msg{
+            height: 100%;
+            width: 100%;
+            position:absolute;
+            z-index: 1;
+            top:0;
+            transition: display 1s ease;
+            display: flex;
+            flex-direction: column;
+            background-color: rgba(0,0,0,.85);
+        }
+        .msg textarea{
+            resize: none;
+            width: 95%;
+            border: none;
+            background:none;
+            color: #39FF14;
+            letter-spacing: 3px;
+            font-size: 25px;
+            transition:all .2s ease;
+            font-family: "Lobster", sans-serif;
+            position: relative;
+        }
+        .msg textarea::placeholder{
+            width: 100%;
+            transform: translateY(-50%);
+            display: flex;
+            line-height: 290px;
+            top: 50%;
+            font-family: "Arial";
+            font-size: 30px;
+            text-transform: uppercase;
+            font-weight: 200;
+            color: #04d9ff;
+            text-align: center;
+            letter-spacing: 4px;
+            position: absolute;
+        }
+        .msg textarea:focus{
+            outline: none;
+        }
+        .msg .des{
+            width: calc(100% - 20px );
+            top: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 0;
+            left: 10px;
+            background-color: #fff2;
+            position:relative;
+        }
+        .msg .tit{
+            position: relative;
+            background-color: #fff2;
+            width: calc(100% - 20px);
+            left: 10px;
+            height: 70px;
+            top: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .msg .tit .title{
+            height: 50%;
+            width: 95%;
+            background: none;
+            border: none;
+            font-size: 25px;
+            color: #39FF14;
+            text-transform: uppercase;
+            text-decoration: underline;
+            font-family: "Arial", sans-serif;
+        }
+        .msg .title::placeholder{
+            width: 100%;
+            transform: translateY(-50%);
+            top: 50%;
+            font-family: "Arial";
+            font-size: 30px;
+            text-transform: uppercase;
+            font-weight: 500;
+            text-decoration: none;
+            color: #04d9ff;
+            text-align: center;
+            letter-spacing: 3px;
+            position: absolute;
+        }
+        .msg .title:focus{
+            outline: none;
+        }
+        .msg .button{
+            background: none;
+            color: #f72119;
+            border: white 2px solid;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            height: 50px;
+            width: 80%;
+            text-transform: uppercase;
+            transition: background .5s ease, color .5s ease;
+            letter-spacing: 3px;
+            left: 10%;
+            font-size: 20px;
+            font-family: "Arial", sans-serif;
+            bottom: 30px;
+            position:absolute;
+        }
+        .msg .button:hover{
+            border: none;
+            background: #f72119;
+            color: white;
+        }
+        .cross{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 40px;
+            cursor: pointer;
+            width: 40px;
+            position:absolute;
+            z-index: 99;
+            top: 0;
+            right: 0;
+        }
+        .cross .up{
+            height: 3px;
+            width: 70%;
+            transform: rotateZ(45deg);
+            background-color: white;
+            position:absolute;
+        }
+        .cross .down{
+            height: 3px;
+            width: 70%;
+            transform: rotateZ(-45deg);
+            background-color: white;
+            position:absolute;
+        }
+        .donemsg{
+            position: absolute;
+            height: 40px;
+            width: calc(40% - 10px);
+            left: 5px;
+            top: 5px;
+            color: white;
+            box-sizing: border-box;
+            line-height: 40px;
+            padding-left: 10px;
+            z-index: 99;
+            font-size: 20px;
+            font-family: "Arial";
+            border-radius: 5px;
+            border: darkblue 2px solid;
+            background-color: teal;
+        }
+        .message{
+            position:absolute;
+            height: 100vh;
+            width: 100vw;
+            background-color: #0009;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .message .box{
+            height: 50rem;
+            width: 80rem;
+            position:relative;
+            background-color: #E0E722;
+            border-radius: 10rem;
+            border: 5rem solid tomato;
+        }
+        .message .text{
+            height: 60%;
+            width: 100%;
+            position: relative;
+            background-color: tomato;
+            color: #e0e722;
+            display: flex;
+            flex-direction: column;
+        }
+        .message .text .titlees::after, .message .text .descees::after{
+            content: "Title";
+            position:absolute;
+            font-size: 1.4rem;
+            height: 4rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #e0e722;
+            line-height: 100%;
+            font-family: "Arial";
+            left: 0;
+            top: 1.5rem;
+        }
+        .message .text .descees::after{
+            content: "Description";
+            right: 0;
+        }
+        .message .text .titlees{
+            height: 40%;
+            font-weight: 600;
+            border-bottom: 4px solid #e0e722;
+            font-size: 5rem;
+            text-transform: uppercase;
+            font-family: "Arial", sans-serif;
+            line-height: 12rem;
+            box-sizing: border-box;
+            padding-left: 5rem;
+            width: 100%;
+        }
+        .message .text .descees{
+            box-sizing: border-box;
+            height: 56%;
+            text-align: right;
+            padding-right: 3rem;
+            position:relative;
+            font-size: 2.3rem;
+            padding-top: 4rem;
+            font-family: "Lobster", sans-serif;
+            width: 100%;
+        }
+        .message .btns{
+            height: 40%;
+            width: 100%;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            position: relative;
+        }
+        .message .btns form input{
+            background: none;
+            box-shadow: 
+                inset 2rem 2rem 0 tomato,
+                1rem 1rem 0 blue;
+            height: 10rem;
+            border: none;
+            width: 25rem;
+            font-family: "Black Ops One", sans-serif;
+            color: tomato;
+            font-size: 3rem;
+            transition: all .3s ease;
+            box-sizing: border-box;
+            cursor: pointer;
+            border-radius: 5rem;
+        }
+        .message .btns form input:hover{
+            box-shadow: 
+                inset 1rem 1rem 0 tomato,
+                2rem 2rem 0 blue;
+            padding-left:2rem;
+            padding-top: 2rem;
+            font-size: 4rem;
+            color: blue;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="message">
+        <div class="box">
+            <div class="text">
+                <div class="titlees">{{textit}}</div>
+                <div class="descees">{{texdes}}</div>
+            </div>
+            <div class="btns">
+                <form action="/snooze" method="get"><input type="submit" value="Snooze"></form>
+                <form action="/turn" method="post"><input type="submit" value="Turn Of">
+                <input type="text" name="dateess" value={{cls}} style="display:none">
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="donemsg">
+        <div class="mmssg">{{ddms}}</div>
+        <div class="cross donms">
+            <div class="up"></div>
+            <div class="down"></div>
+        </div>
+    </div>
+    <div class="clock-section">
+        <div class="inner-section">
+            <div class="dot"></div>
+            <div class="first-set">
+                <div class="container2">
+                    <div class="hour">
+                        <div class="hourhand"></div>
+                    </div>
+                    <div class="minute">
+                        <div class="minhand"></div>
+                    </div>
+                    <div class="second">
+                        <div class="sechand"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="sec-set">
+                <div class="container2">
+                    <div class="hour">
+                        <div class="hourhand"></div>
+                    </div>
+                    <div class="minute">
+                        <div class="minhand"></div>
+                    </div>
+                    <div class="second">
+                        <div class="sechand"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="thir-set">
+                <div class="container2">
+                    <div class="hour">
+                        <div class="hourhand"></div>
+                    </div>
+                    <div class="minute">
+                        <div class="minhand"></div>
+                    </div>
+                    <div class="second">
+                        <div class="sechand"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="fourt-set">
+                <div class="container2">
+                    <div class="hour">
+                        <div class="hourhand"></div>
+                    </div>
+                    <div class="minute">
+                        <div class="minhand"></div>
+                    </div>
+                    <div class="second">
+                        <div class="sechand"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="middlecircle">
+                <div class="container2">
+                    <div class="dot"></div>
+                    <div class="hour">
+                        <div class="hourhand"></div>
+                    </div>
+                    <div class="minute">
+                        <div class="minhand"></div>
+                    </div>
+                    <div class="second">
+                        <div class="sechand"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="digitalclk"></div>
+    <div class="qu">
+        <div class="hourqu">hrs</div>
+        <div class="minqu">min</div>
+        <div class="secqu">sec</div>
+    </div>
+    <div class="meri"></div>
+    <div class="calendersect">
+        <div class="top">
+            <span class="left"><</span>
+            <span class="Month-name"></span>
+            <span class="right">></span>
+        </div>
+
+        <div class="days">
+            <div>Sun</div>
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thr</div>
+            <div>Fri</div>
+            <div>Sat</div>
+        </div>
+
+        <div class="dates">
+            <!-- div*31{$} -->
+        </div>
+
+        <div class="msg">
+            <div class="cross mssg">
+                <div class="up"></div>
+                <div class="down"></div>
+            </div>
+            <form action="/done" method="post">
+                <div class="tit"><input type="text" placeholder="Title" class="title" name="title"></div>
+                <div class="des"><textarea class="description" rows="10" cols="30" placeholder="Description" name="desc"></textarea></div>
+                <input type="text" name="datess" class="dateen" style="display:none">
+                <input type="submit" class="button" value="Create Reminder">
+            </form>
+        </div>
+    </div>
+    <script>
+        let datee = new Date();
+        const mon = [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+        ];
+        function datess(){
+            var datesOfMonth = "";
+            $(".dates").empty();
+            $(".Month-name").empty();
+            $(".Month-name").append(`${mon[datee.getMonth()]} <br> <span class="Year">${datee.getFullYear()}</span></div>`);
+            var prre = new Date(datee.getFullYear(), datee.getMonth(), 1).getDay();
+            var pree = new Date(datee.getFullYear(), datee.getMonth(), 0).getDate();
+            var thiss = new Date(datee.getFullYear(), datee.getMonth()+1, 0).getDate();
+            var thissday = new Date(datee.getFullYear(), datee.getMonth()+1, 0).getDay();
+            for(let i=prre; i>0; i--){
+                let year, month;
+                if(datee.getMonth() == 0){
+                    year = datee.getFullYear() -1;
+                    month = 11;
+                }else{
+                    year = datee.getFullYear();
+                    month = datee.getMonth()-1;
+                }
+                datesOfMonth += `<div class="date prev"><span class="${pree-i+1} ${month} ${year}">${pree - i + 1}</span></div>`;
+            }
+            for(let i=1; i<=thiss; i++){
+                if(i == datee.getDate() && datee.getMonth() == new Date().getMonth() && datee.getFullYear() == new Date().getFullYear()){
+                    datesOfMonth += `<div class="date"><span class="today ${i} ${datee.getMonth()} ${datee.getFullYear()}">${i}</span></div>`;
+                    continue;
+                }
+                datesOfMonth += `<div class="date"><span class="${i} ${datee.getMonth()} ${datee.getFullYear()}">${i}</span></div>`;
+            }
+            for(let i=1; i<7-thissday; i++){
+                let year, month;
+                if(datee.getMonth() == 11){
+                    year = datee.getFullYear() +1;
+                    month = 0;
+                }else{
+                    year = datee.getFullYear();
+                    month = datee.getMonth()+1;
+                }
+                datesOfMonth += `<div class="date next"><span class="${i} ${month} ${year}">${i}</span></div>`;
+            }
+            $(".dates").append(datesOfMonth);
+            
+            $(".date span").click(function(){
+                let bbs = $(this).attr("class").split(" ");
+                let td = new Date(); 
+                if((bbs[bbs.length-1] >= td.getFullYear() && bbs[bbs.length-2] > td.getMonth()) || (bbs[bbs.length-1] == td.getFullYear() && bbs[bbs.length-2] == td.getMonth() && bbs[bbs.length-3] > td.getDate())){
+                    $(".msg").css("display", "block");
+                    $(".msg").css("pointer-events","all");
+                    $(".dateen").val(`${bbs[bbs.length-3]}/${bbs[bbs.length-2]}/${bbs[bbs.length-1]}`);
+                }
+            });
+        }
+        datess();
+        if($(".titlees").is(":empty") && $(".descees").is(":empty")){
+                $(".message").css("display", "none");
+                $(".message").css("pointer-events", "none");
+            }
+            if($(".mmssg").is(":empty")){
+                $(".donemsg").css("display","none");
+            }
+            $(".msg").css("display", "none");
+            $(".msg").css("pointer-events", "none");
+        function sssec(){
+                let date = new Date();
+                var sec = date.getSeconds();
+                var hour = date.getHours();
+                var ssec = (sec * 360) / 60 + "deg";
+                var min = date.getMinutes();
+                var smin = (min * 360) / 60 + "deg";
+                var shour = (((hour % 12) * 360) / 12) + "deg";
+                $(".hour").css("transform", `rotateZ(${shour})`);
+                $(".minute").css("transform", `rotateZ(${smin})`);
+                $(".second").css("transform", `rotateZ(${ssec})`);
+                $(".digitalclk").empty();
+                var am = "AM";
+                if(min < 10) min = "0" + min;
+                if(hour > 12) am = "PM";
+                if(hour > 12) hour = hour%12;
+                if(hour < 10) hour = "0" + hour;
+                if(sec < 10) sec = sec = "0" + sec;
+                $(".meri").empty();
+                $(".meri").append(am);
+                $(".digitalclk").append(`${hour} : ${min} : ${sec}`);
+            }
+            sssec();
+            setInterval(sssec, 200);
+            $(".mssg").click(function(){
+                $(".msg").css("display","none");
+            });
+        $("window").ready(function(){
+            $(".description").focus(function(){
+                $(".des").css("outline","3px solid #4D4DFF")
+            });
+            $(".description").blur(function(){
+                $(".des").css("outline","none")
+            });
+            $(".title").focus(function(){
+                $(".tit").css("outline","3px solid #4D4DFF")
+            });
+            $(".title").blur(function(){
+                $(".tit").css("outline","none")
+            });
+            $(".donms").click(function(){
+                $(".donemsg").css("display", "none");
+            });
+            $(".right").click(function(){
+                if(datee.getMonth() < 11){
+                    datee.setMonth(datee.getMonth()+1);
+                    datess();
+                }else{
+                    datee.setFullYear(datee.getFullYear()+1);
+                    datee.setMonth(0);
+                    datess();
+                }
+            });
+            $(".left").click(function(){
+                if(datee.getMonth() > 0){
+                    datee.setMonth(datee.getMonth()-1);
+                    datess();
+                }else{
+                    datee.setFullYear(datee.getFullYear()-1);
+                    datee.setMonth(11);
+                    datess();
+                }
+            });
+            
+        });
+
+    </script>
+</body>
+</html>
